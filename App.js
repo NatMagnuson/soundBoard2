@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text} from 'react-native';
+import {Slider} from '@react-native-community/slider';
 import PredefinedSoundPressable from './components/PredefinedSoundPressable';
 import RecordAndPlayPressable from './components/RecordAndPlayPressable';
 import CatsSound from './assets/Cats.mp3';
@@ -12,6 +13,8 @@ import HorseSound from './assets/Horse.wav';
 const App = () => {
     return (
         <View style={styles.container}>
+            <Text style={styles.instructionBox}>Nathan's thrown together soundboard</Text>
+
             {/* First Row */}
             <View style={styles.row}>
                 <PredefinedSoundPressable soundUri={CatsSound} />
@@ -31,7 +34,7 @@ const App = () => {
                 <RecordAndPlayPressable />
                 <RecordAndPlayPressable />
             </View>
-            <Text>onLongPress allows you to change the sound associated with the recording fields</Text>
+            <Text style={styles.instructionBox}>onLongPress allows you to change the sound associated with the recording fields</Text>
         </View>
     );
 };
@@ -39,7 +42,7 @@ const App = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#50E5D3',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
@@ -61,8 +64,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 10,
     },
-    firstSix: {
+    instructionBox: {
         backgroundColor: '#f0f0f0',
+        borderWidth: 2,
+        borderColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+        padding: 5,
+    },
+    firstSix: {
+        backgroundColor: '#FAFF99',
     },
     lastThree: {
         backgroundColor: '#e0e0e0',

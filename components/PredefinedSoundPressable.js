@@ -33,13 +33,13 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: '#ccc',
+        borderColor: 'black',
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
     },
     firstSix: {
-        backgroundColor: '#f0f0f0',
+        backgroundColor: '#FAFF99',
     },
 });
 
