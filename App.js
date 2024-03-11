@@ -1,6 +1,6 @@
-import React from 'react';
-import { View, StyleSheet, Text} from 'react-native';
-import {Slider} from '@react-native-community/slider';
+import React, { useState } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import Slider from '@react-native-community/slider';
 import PredefinedSoundPressable from './components/PredefinedSoundPressable';
 import RecordAndPlayPressable from './components/RecordAndPlayPressable';
 import CatsSound from './assets/Cats.mp3';
@@ -11,31 +11,58 @@ import CowSound from './assets/Cow.wav';
 import HorseSound from './assets/Horse.wav';
 
 const App = () => {
+    const [numPredefinedSounds, setNumPredefinedSounds] = useState(3);
+    const [numRecordAndPlay, setNumRecordAndPlay] = useState(3);
+
     return (
         <View style={styles.container}>
             <Text style={styles.instructionBox}>Nathan's thrown together soundboard</Text>
 
-            {/* First Row */}
-            <View style={styles.row}>
-                <PredefinedSoundPressable soundUri={CatsSound} />
-                <PredefinedSoundPressable soundUri={DogBarkingSound} />
-                <PredefinedSoundPressable soundUri={LionSound} />
-            </View>
-            {/* Second Row */}
-            <View style={styles.row}>
-                <PredefinedSoundPressable soundUri={ZebraSound} />
-                <PredefinedSoundPressable soundUri={CowSound} />
-                <PredefinedSoundPressable soundUri={HorseSound} />
+            {/* First Slider: Determines the number of PredefinedSoundPressables */}
+            <Slider
+                style={{ width: 200, height: 40 }}
+                minimumValue={3}
+                maximumValue={6}
+                minimumTrackTintColor="#FFFFFF"
+                maximumTrackTintColor="#000000"
+                onValueChange={(value) => setNumPredefinedSounds(value)}
+            />
+
+            {/* Render PredefinedSoundPressables based on the state */}
+            <View>
+                {Array.from({ length: Math.floor((numPredefinedSounds + 2) / 3) }).map((_, rowIndex) => (
+                    <View style={styles.row} key={rowIndex}>
+                        {Array.from({ length: Math.min(3, numPredefinedSounds - rowIndex * 3) }).map((_, index) => (
+                            <PredefinedSoundPressable key={index + rowIndex * 3} soundUri={(index + rowIndex * 3) % 2 === 0 ? CatsSound : DogBarkingSound} />
+                        ))}
+                    </View>
+                ))}
             </View>
 
-            {/* Third Row */}
-            <View style={styles.row}>
-                <RecordAndPlayPressable />
-                <RecordAndPlayPressable />
-                <RecordAndPlayPressable />
+            {/* Second Slider: Determines the number of RecordAndPlayPressables */}
+            <Slider
+                style={{ width: 200, height: 40 }}
+                minimumValue={3}
+                maximumValue={6}
+                minimumTrackTintColor="#FFFFFF"
+                maximumTrackTintColor="#000000"
+                onValueChange={(value) => setNumRecordAndPlay(value)}
+            />
+
+            {/* Render RecordAndPlayPressables based on the state */}
+            <View>
+                {Array.from({ length: Math.floor((numRecordAndPlay + 2) / 3) }).map((_, rowIndex) => (
+                    <View style={styles.row} key={rowIndex}>
+                        {Array.from({ length: Math.min(3, numRecordAndPlay - rowIndex * 3) }).map((_, index) => (
+                            <RecordAndPlayPressable key={index + rowIndex * 3} />
+                        ))}
+                    </View>
+                ))}
             </View>
+
             <Text style={styles.instructionBox}>onLongPress allows you to change the sound associated with the recording fields</Text>
         </View>
+
     );
 };
 
@@ -54,16 +81,6 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingVertical: 10,
     },
-    box: {
-        width: 100,
-        height: 100,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: '#ccc',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 10,
-    },
     instructionBox: {
         backgroundColor: '#f0f0f0',
         borderWidth: 2,
@@ -72,12 +89,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 10,
         padding: 5,
-    },
-    firstSix: {
-        backgroundColor: '#FAFF99',
-    },
-    lastThree: {
-        backgroundColor: '#e0e0e0',
     },
 });
 
