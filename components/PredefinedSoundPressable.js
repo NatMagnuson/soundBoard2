@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 import { Audio } from 'expo-av';
 
 const PredefinedSoundPressable = ({ soundUri }) => {
@@ -19,12 +19,28 @@ const PredefinedSoundPressable = ({ soundUri }) => {
     };
 
     return (
-        <Pressable onPress={handlePress}>
+        <Pressable style={[styles.box, styles.firstSix]} onPress={handlePress}>
             {({ pressed }) => (
                 <Text style={{ color: pressed ? 'red' : 'blue' }}>Play Sound</Text>
             )}
         </Pressable>
     );
 };
+
+const styles = StyleSheet.create({
+    box: {
+        width: 100,
+        height: 100,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#ccc',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    firstSix: {
+        backgroundColor: '#f0f0f0',
+    },
+});
 
 export default PredefinedSoundPressable;

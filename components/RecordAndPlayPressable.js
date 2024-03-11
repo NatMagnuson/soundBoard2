@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Pressable, Text } from 'react-native';
+import { Pressable, Text, StyleSheet } from 'react-native';
 import { Audio } from 'expo-av';
 
 const RecordAndPlayPressable = () => {
@@ -75,7 +75,7 @@ const RecordAndPlayPressable = () => {
     };
 
     return (
-        <Pressable onPress={handlePress} onLongPress={handleLongPress}>
+        <Pressable style={[styles.box, styles.lastThree]}  onPress={handlePress} onLongPress={handleLongPress}>
             {({ pressed }) => (
                 <Text style={{ color: pressed ? 'red' : 'blue' }}>
                     {recording ? 'Stop Recording' : (recordingUri ? 'Play' : 'Start Recording')}
@@ -85,4 +85,19 @@ const RecordAndPlayPressable = () => {
     );
 };
 
+const styles = StyleSheet.create({
+    box: {
+        width: 100,
+        height: 100,
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: '#ccc',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    lastThree: {
+        backgroundColor: '#f0f0f0',
+    },
+});
 export default RecordAndPlayPressable;
