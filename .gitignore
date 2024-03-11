@@ -33,3 +33,4 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+/.vs/soundBoard2/FileContentIndex/1095eb80-fdee-40ac-96d1-cd3c7c37b8fd.vsidx
